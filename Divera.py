@@ -19,20 +19,18 @@ DATA = {
     }
 }
 
+def ALAAAAARM(channel):
+    result = requests.post(URL, json=DATA)
+    print(result.status_code)
 
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(1, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(1, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
-GPIO.add_event_detect(1, GPIO.FALLING, callback=ALAAAAARM, bouncetime=300)  
-
+GPIO.add_event_detect(1, GPIO.FALLING, callback=ALAAAAARM, bouncetime=300)
 
 def main():
     while(True):
         time.sleep(10000)
-
-def ALAAAAARM(channel):
-    result = requests.post(URL, json=DATA)
-    print(result.status_code)
 
 if __name__ == "__main__":
     """ This is executed when run from the command line """
